@@ -5,8 +5,8 @@ from utils.print_equation import print_equation
 from utils.print_solution import print_solution
 
 # Example coefficients and constants
-coefficients = [[2, 3, 1], [3, -2, 4], [1, 1, 1]]
-constants = [10, 4, 6]
+coefficients = [[7, 8, 1, 1], [4, 3, 4, 4], [4, 9, 1, 5], [5, 9, 7, 2]]
+constants = [6, 3, 8, 6]
 
 print_equation(coefficients, constants)
 method_choice = input("Choose the method to solve the linear system:\n1 for Cramer's Rule\n2 for Matrix Inversion\n3 for Row Equivalent\n\nEnter choice: ")
