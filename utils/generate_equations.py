@@ -1,17 +1,16 @@
 import numpy as np
 
-# Define the size of the system (number of variables)
-n = 4
+def generate_equations(size):
+    if int(size) < 0:
+        size = 2
 
-# Generate random coefficients and constants
-coefficients = np.random.randint(1, 10, size=(n, n))
-constants = np.random.randint(1, 10, size=n)
+    while True:
+        # Generate random coefficients and constants
+        coefficients = np.random.randint(1, 10, size=(int(size), int(size)))
+        constants = np.random.randint(1, 10, size=int(size))
 
-# Display the generated system
-print(f'coefficients = {coefficients.tolist()}')
-print(f'constants = {constants.tolist()}')
+        is_solvable = np.linalg.det(coefficients) != 0
 
-# Check if the system is solvable
-is_solvable = np.linalg.det(coefficients) != 0
+        if is_solvable:
+            return coefficients.tolist(), constants.tolist()
 
-print("\nIs the system solvable?", is_solvable)

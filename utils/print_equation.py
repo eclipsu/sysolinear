@@ -2,7 +2,7 @@
 
 def print_equation(coefficients, constants):
     num_variables = len(constants)
-    print("The equations are:")
+    print("\nThe equations are:")
     for i in range(num_variables):
         equation = ""
         for j in range(num_variables):

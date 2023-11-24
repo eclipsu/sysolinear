@@ -31,18 +31,43 @@ Linear equations are fundamental in diverse fields:
 
 ## 🔎 Comparative Analysis
 
-The project includes a comparative analysis of the implemented methods, considering factors such as system size, coefficient complexity, and precision requirements.
+The project includes a comparative analysis of the implemented methods, considering factors such as system size, coefficient complexity, and precision requirements. The user is prompted to input the size of the system, allowing for flexibility in exploring different scenarios.
 
-## 🔮 Future Work
+## 🎮 How to use
 
-- Explore additional solution methods.
-- Enhance user interaction and input handling.
-- Optimize for performance in large systems.
-- Formulate conclusions.
+The program generates random linear systems and provides three different methods to solve them: Cramer's Rule, Matrix Inversion, and Row Equivalent. Follow the instructions to input the size of the system and choose the solution method.
 
-<!-- ## 💖 Acknowledgments
+1. Run the `main.py` and input the number of unknowns when prompted.
+2. The program will generate a random linear system of equations.
+3. Choose a method to solve the system:
+   - Enter `1` for Cramer's Rule.
+   - Enter `2` for Matrix Inversion.
+   - Enter `3` for Row Equivalent.
+4. Depending on the method chosen, the program will display the solution.
 
-The project relies on the fractions module in Python for precise arithmetic. -->
+#### Example:
+
+```
+Pick the number of unknowns: 3
+
+The equations are:
+7a + 9b + 6c  = 1
+4a + 2b + 9c  = 8
+2a + 3b + 3c  = 7
+
+
+Choose the method to solve the linear system:
+1 for Cramer's Rule
+2 for Matrix Inversion
+3 for Row Equivalent
+
+Enter choice: 1
+
+Using Cramers Rule, solutions are:
+a = -26/3
+b = 13/3
+c = 34/9
+```
 
 ## 📃 License
 
