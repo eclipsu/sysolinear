@@ -1,7 +1,7 @@
 import numpy as np
 
 def generate_equations(size):
-    if int(size) < 0:
+    if int(size) <= 0 or int(size) > 26:
         size = 2
 
     while True:
