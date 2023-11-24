@@ -1,3 +1,7 @@
+# methods/cramers_rule.py
+from utils.print_solution import print_solution
+from utils.print_equation import print_equation
+
 def calculate_determinant(matrix):
     """
     Calculate the determinant of a square matrix.
@@ -57,16 +61,6 @@ def cramer_rule(coefficients, constants):
     num_variables = len(constants)
     solutions = [0] * num_variables
 
-    # Display the equations
-    print("The equations are:")
-    for i in range(num_variables):
-        equation = ""
-        for j in range(num_variables):
-            variable = chr(ord('a') + j)
-            equation += f"{coefficients[i][j]}{variable} + "
-        equation = equation[:-2]  # Remove the last '+'
-        print(f"{equation} = {constants[i]}")
-
     # Solve the system using Cramer's Rule
     for i in range(num_variables):
         # Create a copy of the coefficient matrix and replace the i-th column with the constants
@@ -81,15 +75,3 @@ def cramer_rule(coefficients, constants):
         solutions[i] = det_temp / det_coeff
 
     return solutions
-
-# Example usage:
-coefficients = [[2, 3, 1], [3, -2, 4], [1, 1, 1]]
-constants = [10, 4, 6]
-
-solutions = cramer_rule(coefficients, constants)
-
-# Display the solutions
-print("\nSolutions are:")
-for i in range(len(solutions)):
-    variable = chr(ord('a') + i)
-    print(f"{variable} = {solutions[i]}")

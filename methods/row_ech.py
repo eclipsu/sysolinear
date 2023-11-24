@@ -1,4 +1,6 @@
 from fractions import Fraction
+from utils.print_equation import print_equation
+from utils.print_solution import print_solution
 
 def print_matrix(matrix):
     """
@@ -10,13 +12,14 @@ def print_matrix(matrix):
     for row in matrix:
         print([str(Fraction(element).limit_denominator()) for element in row])
 
-def gauss_jordan_elimination(coefficients, constants):
+def gauss_jordan_elimination(coefficients, constants, steps=False):
     """
     Solve a system of linear equations using Gauss-Jordan Elimination with logging.
 
     Parameters:
     - coefficients: Coefficient matrix represented as a list of lists.
     - constants: Constants matrix represented as a list.
+    - steps: A boolean flag indicating whether to print steps or not. Default is False.
 
     Returns:
     - solutions: A list containing the solutions for each variable.
@@ -24,10 +27,11 @@ def gauss_jordan_elimination(coefficients, constants):
     augmented_matrix = [coefficients[i] + [constants[i]] for i in range(len(constants))]
     num_variables = len(constants)
 
-    # Print initial augmented matrix
-    print("Initial Augmented Matrix:")
-    print_matrix(augmented_matrix)
-    print("\n")
+    if(steps==True):
+        # Print initial augmented matrix
+        print("Initial Augmented Matrix:")
+        print_matrix(augmented_matrix)
+        print("\n")
 
     for i in range(num_variables):
         # Pivot row
@@ -40,13 +44,15 @@ def gauss_jordan_elimination(coefficients, constants):
 
         # Swap the current row with the pivot row
         augmented_matrix[i], augmented_matrix[pivot_row] = augmented_matrix[pivot_row], augmented_matrix[i]
-        print(f"R{i+1} <-> R{pivot_row+1}")
+        if steps:
+            print(f"R{i+1} <-> R{pivot_row+1}")
 
         # Scale the pivot row to make the pivot element 1
         pivot_element = augmented_matrix[i][i]
         for j in range(i, num_variables + 1):
             augmented_matrix[i][j] /= pivot_element
-        print(f"R{i+1} * 1/{pivot_element}")
+        if steps:
+            print(f"R{i+1} * 1/{pivot_element}")
 
         # Eliminate other rows
         for k in range(num_variables):
@@ -54,25 +60,18 @@ def gauss_jordan_elimination(coefficients, constants):
                 factor = augmented_matrix[k][i]
                 for j in range(i, num_variables + 1):
                     augmented_matrix[k][j] -= factor * augmented_matrix[i][j]
-                print(f"R{k+1} -> R{k+1} - ({factor}) * R{i+1}")
+                if steps:
+                    print(f"R{k+1} -> R{k+1} - ({factor}) * R{i+1}")
 
         # Print the current augmented matrix
-        print(f"Step {i + 1}:")
-        print_matrix(augmented_matrix)
-        print("\n")
+        if steps:
+            print(f"Step {i + 1}:")
+            print_matrix(augmented_matrix)
+            print("\n")
 
     # Extract solutions
     solutions = [row[-1] for row in augmented_matrix]
 
+  
+
     return solutions
-
-coefficients = [[2, 3, 1], [3, -2, 4], [1, 1, 1]]
-constants = [10, 4, 6]
-
-solutions = gauss_jordan_elimination(coefficients, constants)
-
-# Display the solutions
-print("Solutions are:")
-for i in range(len(solutions)):
-    variable = chr(ord('a') + i)
-    print(f"{variable} = {str(Fraction(solutions[i]).limit_denominator())}")
