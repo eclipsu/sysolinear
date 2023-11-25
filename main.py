@@ -12,6 +12,8 @@ from methods.cramers_rule import cramer_rule
 from methods.matrix_inversion import matrix_inversion
 from methods.row_ech import gauss_jordan_elimination
 
+from utils.error import calculate_error
+
 size = input("Pick the number of unknowns: ")
 
 coefficients, constants = generate_equations(size) # Generating
@@ -20,39 +22,29 @@ print_equation(coefficients, constants)
 method_choice = input("Choose the method to solve the linear system:\n1 for Cramer's Rule\n2 for Matrix Inversion\n3 for Row Equivalent\n\nEnter choice: ")
 
 if method_choice == '1':
-    # Measure the execution time of cramer_rule function
-    start_time = time.time()
-    solution = cramer_rule(coefficients, constants)
-    end_time = time.time()
+    solution, execution_time, error = cramer_rule(coefficients, constants)
 
-    print("Using Cramer's Rule:")
-    print_solution(solution)
-
-    print(f"Execution time: {end_time - start_time} seconds")
+    print_solution(solution, selected=0)
+    print(f"Error: {error}")
+    print(f"Execution time: {execution_time} seconds")
 
 elif method_choice == '2':
-    start_time = time.time()
-    solution = matrix_inversion(coefficients, constants)
-    end_time = time.time()
+    solution, execution_time, error = matrix_inversion(coefficients, constants)
 
-    print("\nUsing Matrix Inversion method:")
-    print_solution(solution)
-
-    print(f"Execution time: {end_time - start_time} seconds")
+    print_solution(solution, selected=1)
+    print(f"Error: {error}")
+    print(f"Execution time: {execution_time} seconds")
     
 
 elif method_choice == '3':
-    step_choice = input("Show steps?\n1 for Yes\n2 for No\n Enter choice:")
+    step_choice = input("Show steps?\n1 for Yes\n2 for No\nEnter choice:")
     steps = True if step_choice == '1' else False
 
-    start_time = time.time()
-    solution = gauss_jordan_elimination(coefficients, constants, steps=steps)
-    end_time = time.time()
+    solution, execution_time, error = gauss_jordan_elimination(coefficients, constants, steps)
 
-    print("\nUsing Row reduction method:")
-    print_solution(solution)
-
-    print(f"Execution time: {end_time - start_time} seconds")
+    print_solution(solution, selected=1)
+    print(f"Error: {error}")
+    print(f"Execution time: {execution_time} seconds")
 
 else:
     print("Something went wrong!")

@@ -1,6 +1,5 @@
-# methods/cramers_rule.py
-from utils.print_solution import print_solution
-from utils.print_equation import print_equation
+import time
+from utils.error import calculate_error
 
 def calculate_determinant(matrix):
     """
@@ -37,6 +36,7 @@ def submatrix(matrix, col):
     return [row[:col] + row[col + 1:] for row in matrix[1:]]
 
 def cramer_rule(coefficients, constants):
+    start_time = time.time()
     """
     Solve a system of linear equations using Cramer's Rule.
 
@@ -74,4 +74,10 @@ def cramer_rule(coefficients, constants):
         # Calculate the solution for the i-th variable
         solutions[i] = det_temp / det_coeff
 
-    return solutions
+    end_time = time.time()
+    execution_time = end_time - start_time
+
+    error = calculate_error(coefficients[0], constants[0], solutions)
+
+
+    return solutions, execution_time, error

@@ -6,8 +6,8 @@ def generate_equations(size):
 
     while True:
         # Generate random coefficients and constants
-        coefficients = np.random.randint(1, 10, size=(int(size), int(size)))
-        constants = np.random.randint(1, 10, size=int(size))
+        coefficients = np.random.randint(-100, 100, size=(int(size), int(size)))
+        constants = np.random.randint(-100, 100, size=int(size))
 
         is_solvable = np.linalg.det(coefficients) != 0
 

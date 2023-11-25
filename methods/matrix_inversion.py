@@ -1,5 +1,5 @@
-from utils.print_equation import print_equation
-from utils.print_solution import print_solution
+import time
+from utils.error import calculate_error
 
 def transpose(matrix):
     """
@@ -58,6 +58,8 @@ def matrix_inverse(matrix):
     return identity_matrix
 
 def matrix_inversion(coefficients, constants):
+    start_time = time.time()
+
     """
     Solve a system of linear equations using matrix inversion.
 
@@ -69,7 +71,17 @@ def matrix_inversion(coefficients, constants):
     - solutions: A list containing the solutions for each variable.
     """
 
+    coefs = coefficients[0][:]
+
     inverse_coefficients = matrix_inverse(coefficients)
     solutions = matrix_multiply(inverse_coefficients, [[constant] for constant in constants])
 
-    return [s[0] for s in solutions]
+    end_time = time.time()
+    execution_time = end_time - start_time
+
+    error = calculate_error(coefs, constants[0], [item for solution in solutions for item in solution])
+
+    return [s[0] for s in solutions], execution_time, error
+
+
+

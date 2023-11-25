@@ -1,6 +1,6 @@
 from fractions import Fraction
-from utils.print_equation import print_equation
-from utils.print_solution import print_solution
+import time
+from utils.error import calculate_error
 
 def print_matrix(matrix):
     """
@@ -13,6 +13,8 @@ def print_matrix(matrix):
         print([str(Fraction(element).limit_denominator()) for element in row])
 
 def gauss_jordan_elimination(coefficients, constants, steps=False):
+    start_time = time.time()
+
     """
     Solve a system of linear equations using Gauss-Jordan Elimination with logging.
 
@@ -72,6 +74,9 @@ def gauss_jordan_elimination(coefficients, constants, steps=False):
     # Extract solutions
     solutions = [row[-1] for row in augmented_matrix]
 
-  
+    end_time = time.time()
+    execution_time = end_time - start_time
 
-    return solutions
+    error = calculate_error(coefficients[0], constants[0], solutions)
+
+    return solutions, execution_time, error
