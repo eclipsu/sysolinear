@@ -37,10 +37,10 @@ elif method_choice == '2':
     
 
 elif method_choice == '3':
-    step_choice = input("Show steps?\n1 for Yes\n2 for No\nEnter choice:")
-    steps = True if step_choice == '1' else False
+    # step_choice = input("Show steps?\n1 for Yes\n2 for No\nEnter choice:")
+    # steps = True if step_choice == '1' else False
 
-    solution, execution_time, error = gauss_jordan_elimination(coefficients, constants, steps)
+    solution, execution_time, error = gauss_jordan_elimination(coefficients, constants)
 
     print_solution(solution, selected=1)
     print(f"Error: {error}")

@@ -57,6 +57,28 @@ def matrix_inverse(matrix):
 
     return identity_matrix
 
+def calculate_determinant(matrix):
+    """
+    Calculate the determinant of a square matrix using recursive expansion by minors.
+
+    Parameters:
+    - matrix: A square matrix represented as a list of lists.
+
+    Returns:
+    - determinant: The determinant of the matrix.
+    """
+    size = len(matrix)
+    if size == 1:
+        return matrix[0][0]
+    elif size == 2:
+        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
+    else:
+        determinant = 0
+        for i in range(size):
+            submatrix = [row[:i] + row[i + 1:] for row in matrix[1:]]
+            determinant += ((-1) ** i) * matrix[0][i] * calculate_determinant(submatrix)
+        return determinant
+
 def matrix_inversion(coefficients, constants):
     start_time = time.time()
 
@@ -70,6 +92,14 @@ def matrix_inversion(coefficients, constants):
     Returns:
     - solutions: A list containing the solutions for each variable.
     """
+    
+    determinant = calculate_determinant(coefficients)
+
+    if determinant == 0:
+        # Handle the case where the determinant is zero (inconsistent or dependent system)
+        end_time = time.time()
+        execution_time = end_time - start_time
+        return None, execution_time, "System is inconsistent or dependent (no unique solution)"
 
     coefs = coefficients[0][:]
 
@@ -82,6 +112,3 @@ def matrix_inversion(coefficients, constants):
     error = calculate_error(coefs, constants[0], [item for solution in solutions for item in solution])
 
     return [s[0] for s in solutions], execution_time, error
-
-
-

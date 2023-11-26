@@ -12,7 +12,8 @@ def print_matrix(matrix):
     for row in matrix:
         print([str(Fraction(element).limit_denominator()) for element in row])
 
-def gauss_jordan_elimination(coefficients, constants, steps=False):
+def gauss_jordan_elimination(coefficients, constants):
+    steps = False
     start_time = time.time()
 
     """
@@ -78,5 +79,4 @@ def gauss_jordan_elimination(coefficients, constants, steps=False):
     execution_time = end_time - start_time
 
     error = calculate_error(coefficients[0], constants[0], solutions)
-
     return solutions, execution_time, error
