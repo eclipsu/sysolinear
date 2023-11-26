@@ -42,7 +42,7 @@ elif method_choice == '3':
 
     solution, execution_time, error = gauss_jordan_elimination(coefficients, constants)
 
-    print_solution(solution, selected=1)
+    print_solution(solution, selected=2)
     print(f"Error: {error}")
     print(f"Execution time: {execution_time} seconds")
 
