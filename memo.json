@@ -15,9 +15,28 @@
         "gauss_jordan": 0.0
     },
     "5": {
+        "inversion": 0.0,
+        "cramer": 0.0,
         "gauss_jordan": 0.0
     },
     "6": {
+        "inversion": 0.0,
+        "cramer": 0.0,
+        "gauss_jordan": 0.0
+    },
+    "7": {
+        "inversion": 0.0,
+        "cramer": 0.040946006774902344,
+        "gauss_jordan": 0.0
+    },
+    "8": {
+        "inversion": 0.02933812141418457,
+        "cramer": 0.23432612419128418,
+        "gauss_jordan": 0.0
+    },
+    "9": {
+        "inversion": 0.2507450580596924,
+        "cramer": 2.421327590942383,
         "gauss_jordan": 0.0
     }
 }

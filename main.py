@@ -45,7 +45,7 @@ def benchmark_methods(max_size):
     memo = load_memo()
 
     for size in range(2, max_size + 1):
-        if str(size) in memo:
+        if str(size) in memo and all(key in memo[str(size)] for key in ["cramer", "inversion", "gauss_jordan"]):
             print(f"Skipping computation for size {size}, using cached data.")
             sizes.append(size)
             cramer_times.append(memo[str(size)]["cramer"])
@@ -55,44 +55,35 @@ def benchmark_methods(max_size):
 
         coefficients, constants = generate_equations(size)
         # print_equation(coefficients, constants)
-        
+
+        # Initialize or update the memo entry for this size
+        if str(size) not in memo:
+            memo[str(size)] = {}
+
         # Benchmark Matrix Inversion
         start_time = time.time()
         inversion_solution = matrix_inversion(coefficients, constants)
         inversion_time = time.time() - start_time
         inversion_times.append(inversion_time)
-        
-        # Save to memo
-        memo[str(size)] = {
-            "inversion": inversion_time,
-        }
-        save_memo(memo)
+        memo[str(size)]["inversion"] = inversion_time
 
         # Benchmark Cramer's Rule
         start_time = time.time()
         cramer_solution = cramer_rule(coefficients, constants)
         cramer_time = time.time() - start_time
         cramer_times.append(cramer_time)
-        
-        # Save to memo
-        memo[str(size)] = {
-            "cramer": cramer_time,
-        }
-        save_memo(memo)
-
-
+        memo[str(size)]["cramer"] = cramer_time
 
         # Benchmark Gauss-Jordan Elimination
         start_time = time.time()
         gauss_jordan_solution = gauss_jordan_elimination(coefficients, constants)
         gauss_jordan_time = time.time() - start_time
         gauss_jordan_times.append(gauss_jordan_time)
-       
-       # Save to memo
-        memo[str(size)] = {
-            "gauss_jordan": gauss_jordan_time,
-        }
+        memo[str(size)]["gauss_jordan"] = gauss_jordan_time
+
+        # Save updated memo
         save_memo(memo)
+
         sizes.append(size)
 
     return sizes, cramer_times, inversion_times, gauss_jordan_times
