@@ -64,7 +64,7 @@ def benchmark_methods(max_size):
         
         # Save to memo
         memo[str(size)] = {
-            "cramer": cramer_time,
+            "inversion": inversion_time,
         }
         save_memo(memo)
 
@@ -90,7 +90,7 @@ def benchmark_methods(max_size):
        
        # Save to memo
         memo[str(size)] = {
-            "cramer": cramer_time,
+            "gauss_jordan": gauss_jordan_time,
         }
         save_memo(memo)
         sizes.append(size)

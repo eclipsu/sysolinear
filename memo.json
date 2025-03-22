@@ -15,38 +15,9 @@
         "gauss_jordan": 0.0
     },
     "5": {
-        "cramer": 0.0,
-        "inversion": 0.0,
         "gauss_jordan": 0.0
     },
     "6": {
-        "cramer": 0.010666847229003906,
-        "inversion": 0.0053369998931884766,
-        "gauss_jordan": 0.0
-    },
-    "7": {
-        "cramer": 0.04956626892089844,
-        "inversion": 0.0,
-        "gauss_jordan": 0.0
-    },
-    "8": {
-        "cramer": 0.5249271392822266,
-        "inversion": 0.04739809036254883,
-        "gauss_jordan": 0.0
-    },
-    "9": {
-        "cramer": 4.543206691741943,
-        "inversion": 0.43392014503479004,
-        "gauss_jordan": 0.0
-    },
-    "10": {
-        "cramer": 51.45716714859009,
-        "inversion": 4.625621318817139,
-        "gauss_jordan": 0.0
-    },
-    "11": {
-        "cramer": 751.5072867870331,
-        "inversion": 51.62253260612488,
         "gauss_jordan": 0.0
     }
 }
