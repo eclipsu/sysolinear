@@ -64,7 +64,7 @@ The tool generates random systems of equations, solves them using the selected m
 
 ---
 
-## 📊 Example Output
+## Example Output
 
 for size of 10 :
 
@@ -72,7 +72,7 @@ for size of 10 :
 
 ---
 
-## 🧩 File Structure
+## File Structure
 
 ```
 sysolinear/
@@ -92,7 +92,7 @@ sysolinear/
 
 ---
 
-## 🤝 Contribution
+## Contribution
 
 There are room for contributions! Thus, contributions are welcomed! If you'd like to contribute:
 
@@ -113,4 +113,4 @@ There are room for contributions! Thus, contributions are welcomed! If you'd lik
 
 ## Acknowledgments
 
-- Inspired by my Numerical Methods class taken on Grade 12.
+- To my teacher, Durga Prasad Patel, from my Grade 12 Numerical Computation class
