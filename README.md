@@ -1,74 +1,116 @@
-# 🤯 Comparative Analysis of Solution Methods for System of Linear Equations.
+# Linear System Solvers Benchmarking
 
-## 📝 Overview
+This project benchmarks the performance of three numerical methods for solving linear systems of equations:
 
-This project explores various methods for solving systems of linear equations using Python. Linear equations play a crucial role in modeling real-world scenarios, and different solution methods are employed based on the nature of the equations and the requirements of the problem.
+1. **Cramer's Rule**
+2. **Matrix Inversion**
+3. **Gauss Jordan Elimination**
 
-This project is all about figuring out which method works best for different types of problems, **considering how many equations there are, what kind of numbers are in them, and how precise we need to be**, all with the help of Python.
+The tool generates random systems of equations, solves them using the selected method, and measures execution time and error. It visualizes the results using **Matplotlib**.
 
-## 🚗 Real-World Applications
+---
 
-Linear equations are fundamental in diverse fields:
+## Features
 
-- **👩‍🔬 Engineering and Physics:** Analysis and design of structures, circuits, and mechanical systems.
-- **💵 Economics and Finance:** Modeling economic trends, financial decisions, and optimizing investments.
-- **💻 Computer Science and Machine Learning:** Basis for algorithms, data analysis, and training machine learning models.
-- **🤖 Control Systems and Robotics:** Essential for precise control of machines and automated systems.
-- **📊 Statistics and Data Analysis:** Used to fit models to data, understand relationships, and solve optimization problems.
+- Generates systems of linear equations with customizable sizes.
+- Supports Cramer's Rule, Matrix Inversion, and Gauss-Jordan Elimination.
+- Measures execution time and calculates error for each method.
+- Plots execution times for different system sizes using Matplotlib.
+- Uses multiprocessing to speed up benchmarking for large systems.
 
-## 💪 Implemented Solution Methods
+---
 
-1. **Cramer's Rule:**
+## Installation
 
-   - Utilizes determinants to solve the system by ratios of determinants.
+### Prerequisites
 
-2. **Gauss-Jordan Elimination:**
+- Python 3.x
+- Required Python libraries: `numpy`, `matplotlib`
 
-   - Further refines the augmented matrix to reduced row-echelon form for simplified solving.
+### Steps
 
-3. **Matrix Inversion:**
-   - Finds the inverse of the coefficient matrix (if it exists) to obtain the solution.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/eclipsu/sysolinear.git
+   cd sysolinear
+   ```
+2. Install the required libraries:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## 🔎 Comparative Analysis
+---
 
-The project includes a comparative analysis of the implemented methods, considering factors such as system size, coefficient complexity, and precision requirements. The user is prompted to input the size of the system, allowing for flexibility in exploring different scenarios.
+## Usage
 
-## 🎮 How to use
+1. Run the benchmarking tool:
 
-The program generates random linear systems and provides three different methods to solve them: Cramer's Rule, Matrix Inversion, and Row Equivalent. Follow the instructions to input the size of the system and choose the solution method.
+   ```bash
+   python main.py
+   ```
 
-1. Run the `main.py` and input the number of unknowns when prompted.
-2. The program will generate a random linear system of equations.
-3. Choose a method to solve the system:
-   - Enter `1` for Cramer's Rule.
-   - Enter `2` for Matrix Inversion.
-   - Enter `3` for Row Equivalent.
-4. Depending on the method chosen, the program will display the solution.
+2. Enter the **maximum size** of the system you want to benchmark:
 
-#### Example:
+   ```
+   Enter the maximum size of the system for benchmarking: 50
+   ```
+
+3. The tool will:
+
+   - Generate random systems of equations.
+   - Solve them using all three methods.
+   - Display execution times and errors.
+   - Plot the results using Matplotlib.
+
+---
+
+## 📊 Example Output
+
+for size of 10 :
+
+![Benchmarking of Linear system Solvers for 10 variable system](https://i.imgur.com/tgQ2XAu.png)
+
+---
+
+## 🧩 File Structure
 
 ```
-Pick the number of unknowns: 3
-
-The equations are:
-7a + 9b + 6c  = 1
-4a + 2b + 9c  = 8
-2a + 3b + 3c  = 7
-
-
-Choose the method to solve the linear system:
-1 for Cramer's Rule
-2 for Matrix Inversion
-3 for Row Equivalent
-
-Enter choice: 1
-
-Using Cramers Rule, solutions are:
-a = -26/3
-b = 13/3
-c = 34/9
+sysolinear/
+├── main.py                  # Main script
+├── methods/                 # Folder containing numerical methods
+│   ├── cramers_rule.py      # Cramer's Rule
+│   ├── matrix_inversion.py  # Matrix Inversion
+│   └── row_ech.py           # Gauss-Jordan Elimination implementation
+├── utils/                   # Utility functions
+│   ├── generate_equations.py# Random equation generator
+│   ├── print_equation.py    # Function to print equations
+│   ├── print_solution.py    # Function to print solutions
+│   └── error.py             # Error calculation utility
+├── requirements.txt         # List of dependencies
+└── README.md                # This file
 ```
 
-## 📃 License
+---
 
-This project is licensed under the MIT License.
+## 🤝 Contribution
+
+There are room for contributions! Thus, contributions are welcomed! If you'd like to contribute:
+
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m "Add your feature"
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+5. Open a pull request.
+
+## Acknowledgments
+
+- Inspired by my Numerical Methods class taken on Grade 12.
