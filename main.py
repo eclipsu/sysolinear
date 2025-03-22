@@ -1,5 +1,7 @@
 import time
 import matplotlib.pyplot as plt
+import json
+import os
 
 # Random System generation
 from utils.generate_equations import generate_equations
@@ -15,29 +17,83 @@ from methods.row_ech import gauss_jordan_elimination
 
 from utils.error import calculate_error
 
+MEMO_FILE = "memo.json"
+
+def load_memo():
+    """Load memoized data from JSON file if it exists and is valid."""
+    if os.path.exists(MEMO_FILE):
+        try:
+            with open(MEMO_FILE, "r") as file:
+                data = file.read().strip()
+                return json.loads(data) if data else {}  # Handle empty file
+        except json.JSONDecodeError:
+            print("Warning: Invalid JSON in memo file. Resetting memo.")
+            return {}  # Reset memo if corrupted
+    return {}
+
+def save_memo(memo):
+    """Save updated memoized data to JSON file."""
+    with open(MEMO_FILE, "w") as file:
+        json.dump(memo, file, indent=4)
+
 def benchmark_methods(max_size):
-    sizes = range(2, max_size + 1)
+    sizes = []
     cramer_times = []
     inversion_times = []
     gauss_jordan_times = []
 
-    for size in sizes:
+    memo = load_memo()
+
+    for size in range(2, max_size + 1):
+        if str(size) in memo:
+            print(f"Skipping computation for size {size}, using cached data.")
+            sizes.append(size)
+            cramer_times.append(memo[str(size)]["cramer"])
+            inversion_times.append(memo[str(size)]["inversion"])
+            gauss_jordan_times.append(memo[str(size)]["gauss_jordan"])
+            continue 
+
         coefficients, constants = generate_equations(size)
+        # print_equation(coefficients, constants)
+        
+        # Benchmark Matrix Inversion
+        start_time = time.time()
+        inversion_solution = matrix_inversion(coefficients, constants)
+        inversion_time = time.time() - start_time
+        inversion_times.append(inversion_time)
+        
+        # Save to memo
+        memo[str(size)] = {
+            "cramer": cramer_time,
+        }
+        save_memo(memo)
 
         # Benchmark Cramer's Rule
         start_time = time.time()
-        cramer_rule(coefficients, constants)
-        cramer_times.append(time.time() - start_time)
+        cramer_solution = cramer_rule(coefficients, constants)
+        cramer_time = time.time() - start_time
+        cramer_times.append(cramer_time)
+        
+        # Save to memo
+        memo[str(size)] = {
+            "cramer": cramer_time,
+        }
+        save_memo(memo)
 
-        # Benchmark Matrix Inversion
-        start_time = time.time()
-        matrix_inversion(coefficients, constants)
-        inversion_times.append(time.time() - start_time)
+
 
         # Benchmark Gauss-Jordan Elimination
         start_time = time.time()
-        gauss_jordan_elimination(coefficients, constants)
-        gauss_jordan_times.append(time.time() - start_time)
+        gauss_jordan_solution = gauss_jordan_elimination(coefficients, constants)
+        gauss_jordan_time = time.time() - start_time
+        gauss_jordan_times.append(gauss_jordan_time)
+       
+       # Save to memo
+        memo[str(size)] = {
+            "cramer": cramer_time,
+        }
+        save_memo(memo)
+        sizes.append(size)
 
     return sizes, cramer_times, inversion_times, gauss_jordan_times
 
@@ -56,4 +112,5 @@ def plot_benchmark_results(sizes, cramer_times, inversion_times, gauss_jordan_ti
 if __name__ == "__main__":
     max_size = int(input("Enter the maximum size of the system for benchmarking: "))
     sizes, cramer_times, inversion_times, gauss_jordan_times = benchmark_methods(max_size)
-    plot_benchmark_results(sizes, cramer_times, inversion_times, gauss_jordan_times)
+    if sizes:
+        plot_benchmark_results(sizes, cramer_times, inversion_times, gauss_jordan_times)

@@ -9,7 +9,6 @@ def generate_system(num_variables, num_systems=1, filename='equations.csv'):
     with open(filename, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
 
-        # Write header
         header = ['System'] + [f'{chr(ord("a") + i)}' for i in range(num_variables)] + ['Constants']
         writer.writerow(header)
 
